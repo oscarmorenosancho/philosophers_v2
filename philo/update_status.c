@@ -6,11 +6,12 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:11:38 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 15:43:23 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:39:11 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#define CHECK_PERIOD	1000
 
 static void	ft_update_done_status(t_philo_info *pi)
 {
@@ -70,7 +71,7 @@ void	ft_update_status(t_philo_info *pi, t_philo_status new_status)
 
 void	ft_update_dead_loop(t_program_data *data)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (!data->exit_flag && data->done_cntdwn > 0)
@@ -79,5 +80,5 @@ void	ft_update_dead_loop(t_program_data *data)
 		i++;
 		i %= data->args.philo_nbr;
 	}
-	usleep (10);
+	usleep (CHECK_PERIOD);
 }
