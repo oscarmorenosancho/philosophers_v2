@@ -6,7 +6,7 @@
 #    By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 16:36:01 by omoreno-          #+#    #+#              #
-#    Updated: 2023/02/16 13:51:01 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/02/19 14:27:52 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ ft_strlen.c\
 ft_strncmp.c\
 ft_time_diff.c\
 ft_print_event.c\
-ft_update_dead.c\
+update_status.c\
 ft_get_timestamp.c
 
 OBJ := $(SRC:.c=.o)

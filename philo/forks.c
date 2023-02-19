@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:30:10 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/17 11:28:54 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:08:56 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ void	ft_init_forks(t_program_data *data)
 			{
 				data->fork_mutexes[i] = malloc(sizeof(pthread_mutex_t));
 				if (data->fork_mutexes[i])
-				{
 					pthread_mutex_init(data->fork_mutexes[i], NULL);
-				}
 				i++;
 			}
 		}
@@ -61,4 +59,40 @@ void	ft_delete_forks(t_program_data *data)
 	}
 	if (data->forks)
 		free(data->forks);
+}
+
+void	ft_take_left_fork(t_philo_info *pi)
+{
+	int	ml_ret;
+
+	ml_ret = pthread_mutex_lock(pi->left_fork_mutex);
+	pi->forks_taken++;
+	ft_print_event(pi, "has taken a fork: the first one");
+}
+
+void	ft_take_right_fork(t_philo_info *pi)
+{
+	int	ml_ret;
+
+	ml_ret = pthread_mutex_lock(pi->right_fork_mutex);
+	pi->forks_taken++;
+	ft_print_event(pi, "has taken a fork: the second one");
+}
+
+void	ft_release_forks(t_philo_info *pi)
+{
+	int				mu_ret;
+
+	if (pi->forks_taken == 2)
+	{
+		mu_ret = pthread_mutex_unlock(pi->left_fork_mutex);
+		pi->forks_taken--;
+		ft_print_event(pi, "release first fork");
+	}
+	if (pi->forks_taken == 1)
+	{
+		mu_ret = pthread_mutex_unlock(pi->right_fork_mutex);
+		pi->forks_taken--;
+		ft_print_event(pi, "release second fork");
+	}
 }

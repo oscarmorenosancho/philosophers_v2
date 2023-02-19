@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/17 11:32:39 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:27:08 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ typedef struct s_philo_info
 	int				done;
 	int				*done_cntdwn;
 	int				forks_taken;
-	int				*left_fork;
-	int				*right_fork;
 	t_timestamp		eat_ts;
 	t_timestamp		ch_status_ts;
 	t_timestamp		*initial_ts;
 	t_philo_args	*args;
+	pthread_mutex_t	status_mutex;
 	pthread_mutex_t	*left_fork_mutex;
 	pthread_mutex_t	*right_fork_mutex;
 	pthread_mutex_t	*done_cntdwn_mutex;
@@ -89,10 +88,14 @@ void	ft_init_done_cntdwn_mutex(t_program_data *data);
 void	ft_delete_done_cntdwn_mutex(t_program_data *data);
 void	ft_init_forks(t_program_data *data);
 void	ft_delete_forks(t_program_data *data);
+void	ft_take_left_fork(t_philo_info *pi);
+void	ft_take_right_fork(t_philo_info *pi);
 void	ft_init_philo(t_program_data *data);
 void	ft_delete_philo(t_program_data *data);
-int		ft_check_not_finish(t_philo_info *pi);
-int		ft_update_dead(t_philo_info *pi, t_timestamp *ts);
+int		ft_check_finish(t_philo_info *pi);
+void	ft_update_dead(t_philo_info *pi);
+void	ft_update_dead_loop(t_program_data *data);
+void	ft_update_status(t_philo_info *pi, t_philo_status new_status);
 void	ft_philo_sleeps(t_philo_info *pi);
 void	ft_philo_thinks(t_philo_info *pi);
 void	ft_release_forks(t_philo_info *pi);

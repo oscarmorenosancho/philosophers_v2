@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/17 13:55:01 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:00:13 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	ft_print_usage_help(void)
 
 static void	ft_wait_for_ending(t_program_data *data)
 {
-	while (!data->exit_flag && data->done_cntdwn > 0)
-		usleep(1000);
 	if (data->done_cntdwn == 0)
 		printf("DONE COUNTDOWN DETECTED, go and wait with join\n");
 	if (data->exit_flag)
@@ -55,6 +53,7 @@ static void	ft_deploy(t_program_data *data)
 	ft_init_forks(data);
 	ft_init_philo(data);
 	ft_create_threads(data);
+	ft_update_dead_loop(data);
 	ft_wait_for_ending(data);
 	ft_destroy_threads(data);
 	ft_delete_philo(data);
