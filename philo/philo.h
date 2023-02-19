@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 15:27:08 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:44:28 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_program_data
 	int				done_cntdwn;
 	t_philo_args	args;
 	pthread_t		**threads;
+	pthread_t		**dead_threads;
 	int				*forks;
 	pthread_mutex_t	**fork_mutexes;
 	pthread_mutex_t	*done_cntdwn_mutex;
@@ -77,7 +78,6 @@ int		ft_strlen(char *s);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	ft_swap(void *a, void *b);
-void	ft_get_timestamp(t_timestamp *ts);
 time_t	ft_time_diff(t_timestamp *ref, t_timestamp *time);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_check_n_get_argument(const char *s, int *nbr);
@@ -101,9 +101,12 @@ void	ft_philo_thinks(t_philo_info *pi);
 void	ft_release_forks(t_philo_info *pi);
 void	ft_philo_eats(t_philo_info *pi);
 void	*ft_philo_behavior(void *arg);
+void	*ft_philo_dead(void *arg);
 void	ft_create_threads(t_program_data *data);
 void	ft_join_threads(t_program_data *data);
 void	ft_destroy_threads(t_program_data *data);
-void	ft_print_event(t_philo_info *pi, char *s);
-
+void	ft_create_dead_threads(t_program_data *data);
+void	ft_join_dead_threads(t_program_data *data);
+void	ft_destroy_dead_threads(t_program_data *data);
+void	ft_print_event(t_philo_info *pi, t_timestamp *ts, char *s);
 #endif

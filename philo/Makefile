@@ -6,7 +6,7 @@
 #    By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 16:36:01 by omoreno-          #+#    #+#              #
-#    Updated: 2023/02/19 14:27:52 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/02/19 18:43:26 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ forks.c\
 print_mutex.c\
 done_cntdwn_mutex.c\
 threads.c\
+dead_threads.c\
 ft_swap.c\
 ft_init_philo.c\
 ft_check_finish.c\
@@ -32,8 +33,7 @@ ft_strlen.c\
 ft_strncmp.c\
 ft_time_diff.c\
 ft_print_event.c\
-update_status.c\
-ft_get_timestamp.c
+update_status.c
 
 OBJ := $(SRC:.c=.o)
 DEPS := $(SRC:.c=.d)

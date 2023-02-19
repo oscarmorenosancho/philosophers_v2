@@ -6,15 +6,15 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:32:16 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 14:20:28 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 18:13:58 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_print_event(t_philo_info *pi, char *s)
+void	ft_print_event(t_philo_info *pi, t_timestamp *ts, char *s)
 {
-	t_timestamp	ts;
+	t_timestamp	tsp;
 	time_t		te;
 	int			ml_ret;
 	int			mu_ret;
@@ -22,8 +22,11 @@ void	ft_print_event(t_philo_info *pi, char *s)
 	ml_ret = pthread_mutex_lock(pi->print_mutex);
 	if (!ft_check_finish(pi))
 	{
-		ft_get_timestamp(&ts);
-		te = ft_time_diff(pi->initial_ts, &ts);
+		if (ts)
+			tsp = *ts;
+		else
+			gettimeofday(&tsp, NULL);
+		te = ft_time_diff(pi->initial_ts, &tsp);
 		printf("%lu %d %s at iter %d\n", te, pi->id, s, pi->eat_count);
 	}
 	mu_ret = pthread_mutex_unlock(pi->print_mutex);

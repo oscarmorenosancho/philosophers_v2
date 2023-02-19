@@ -6,12 +6,11 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:11:38 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 16:39:11 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:25:25 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#define CHECK_PERIOD	1000
 
 static void	ft_update_done_status(t_philo_info *pi)
 {
@@ -33,12 +32,12 @@ void	ft_update_dead(t_philo_info *pi)
 	int			mu_ret;
 
 	ml_ret = pthread_mutex_lock(&pi->status_mutex);
-	ft_get_timestamp(&ts);
+	gettimeofday(&ts, NULL);
 	et = ft_time_diff(&pi->eat_ts, &ts);
 	dead = (et >= pi->args->time_to_die);
 	if (dead && pi->status != stat_dead)
 	{
-		ft_print_event(pi, "died");
+		ft_print_event(pi, NULL, "died");
 		if (pi->exit_flag)
 			*(pi->exit_flag) = 1;
 		pi->status = stat_dead;
@@ -54,7 +53,7 @@ void	ft_update_status(t_philo_info *pi, t_philo_status new_status)
 	int			mu_ret;
 
 	ml_ret = pthread_mutex_lock(&pi->status_mutex);
-	ft_get_timestamp(&ts);
+	gettimeofday(&ts, NULL);
 	pi->status = new_status;
 	pi->ch_status_ts = ts;
 	if (new_status == stat_eating)
@@ -69,16 +68,3 @@ void	ft_update_status(t_philo_info *pi, t_philo_status new_status)
 		ft_update_done_status(pi);
 }
 
-void	ft_update_dead_loop(t_program_data *data)
-{
-	int			i;
-
-	i = 0;
-	while (!data->exit_flag && data->done_cntdwn > 0)
-	{
-		ft_update_dead(data->philo[i]);
-		i++;
-		i %= data->args.philo_nbr;
-	}
-	usleep (CHECK_PERIOD);
-}
