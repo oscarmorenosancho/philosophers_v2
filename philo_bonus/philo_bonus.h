@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:13:18 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:54:40 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ typedef struct s_philo_args
 typedef struct s_philo_info
 {
 	int				id;
+	int				exit_flag;
+	char			*status_sem_name;
+	sem_t			*sem_status;
 	t_philo_status	status;
 	int				eat_count;
+	int				dead;
 	int				forks_taken;
 	t_timestamp		eat_ts;
 	t_timestamp		ch_status_ts;
+	pthread_t		check_dead_thread;
 }	t_philo_info;
 
 typedef struct s_program_data
@@ -57,14 +62,16 @@ typedef struct s_program_data
 	pid_t			*philo_pids;
 	t_philo_args	args;
 	sem_t			*sem_forks;
+	sem_t			*sem_exit;
 	sem_t			*sem_print;
 	t_philo_info	philo;
 	t_timestamp		initial_ts;
 }	t_program_data;
 
-int		ft_strlen(char *s);
+int		ft_strlen(const char *s);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int nbr);
+char	*ft_posfix_itoa(const char *s, int nbr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_check_n_get_argument(const char *s, int *nbr);
 void	ft_get_timestamp(t_timestamp *ts);
@@ -76,8 +83,17 @@ void	ft_take_forks(t_program_data *data, int philo_id);
 void	ft_release_forks(t_program_data *data, int philo_id);
 void	ft_create_print_sem(t_program_data *data);
 void	ft_destroy_print_sem(t_program_data *data);
+void	ft_create_exit_sem(t_program_data *data);
+void	ft_destroy_exit_sem(t_program_data *data);
+void	ft_create_status_sem(t_program_data *data);
+void	ft_destroy_status_sem(t_program_data *data);
+void	ft_create_philos(t_program_data *data, pid_t *fork_ret);
+void	ft_destroy_philos(t_program_data *data);
+void	ft_wait_for_philos(t_program_data *data);
+void	ft_create_check_dead(t_program_data *data);
 int		ft_update_dead(t_program_data *data, t_timestamp *ts, int philo_id);
 void	ft_philo_behavior(t_program_data *data, int philo_id);
 void	ft_print_event(t_program_data *data, char *s, int philo_id);
+int		ft_check_finish(t_program_data *data);
 
 #endif

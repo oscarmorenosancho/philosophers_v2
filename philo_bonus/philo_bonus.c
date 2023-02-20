@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:17:29 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:13:26 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,73 +34,23 @@ static void	ft_print_usage_help(void)
 	write(2, err_msg, ft_strlen(err_msg));
 }
 
-static void	ft_create_philos(t_program_data *data, pid_t *fork_ret)
-{
-	int				i;
-	t_philo_info	*pi;
-
-	data->philo_pids = malloc(sizeof(pid_t) * data->args.philo_nbr);
-	if (!data->philo_pids)
-		return ;
-	i = 0;
-	while (i < data->args.philo_nbr && (*fork_ret > 0 || i == 0))
-	{
-		*fork_ret = fork();
-		if (*fork_ret > 0)
-			data->philo_pids[i] = *fork_ret;
-		i++;
-	}
-	if (*fork_ret == 0)
-	{
-		pi = &data->philo;
-		pi->id = i;
-		pi->ch_status_ts = data->initial_ts;
-		pi->eat_ts = data->initial_ts;
-		pi->status = stat_sleeping;
-		pi->eat_count = 0;
-		pi->forks_taken = 0;
-		ft_philo_behavior(data, i);
-	}
-}
-
-static void	ft_destroy_philos(t_program_data *data)
-{
-	(void)data;
-}
-
-static void	ft_wait_for_philos(t_program_data *data, pid_t *fork_ret)
-{
-	pid_t			wp_ret;
-	int				wp_status;
-	int				i;
-
-	(void)data;
-	if (*fork_ret != 0)
-	{
-		wp_ret = waitpid(0, &wp_status, WCONTINUED);
-		i = 0;
-		while (i < data->args.philo_nbr)
-		{
-			kill(data->philo_pids[i], SIGKILL);
-			i++;
-		}
-	}
-}
-
 static void	ft_deploy(t_program_data *data)
 {
 	pid_t	fork_ret;
 
 	ft_get_timestamp(&data->initial_ts);
+	ft_create_exit_sem(data);
 	ft_create_print_sem(data);
 	ft_create_forks_sem(data);
 	ft_create_philos(data, &fork_ret);
 	if (fork_ret == 0)
 		return ;
-	ft_wait_for_philos(data, &fork_ret);
+	sem_wait(data->sem_exit);
+	ft_wait_for_philos(data);
 	ft_destroy_philos(data);
 	ft_destroy_forks_sem(data);
 	ft_destroy_print_sem(data);
+	ft_destroy_exit_sem(data);
 }
 
 int	main(int argc, char **argv)

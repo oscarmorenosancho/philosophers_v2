@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:58:12 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:08:42 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:57:59 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,29 @@ void	ft_philo_sleeps(t_program_data *data, int philo_id)
 	t_philo_info	*pi;
 	t_timestamp		ts;
 	time_t			et;
+	int				time_end;
 
+	time_end = 0;
 	pi = &data->philo;
-	if (!ft_update_dead(data, &ts, philo_id))
-	{
+	while (!time_end)
+	{	
+		if (ft_check_finish(data))
+			return ;
+		gettimeofday(&ts, NULL);
 		et = ft_time_diff(&pi->ch_status_ts, &ts);
-		if (et >= data->args.time_to_sleep)
-		{
-			ft_print_event(data, "is thinking", philo_id);
-			pi->status = stat_thinking;
-			pi->ch_status_ts = ts;
-		}
+		time_end = (et >= data->args.time_to_sleep);
+		if (et < data->args.time_to_sleep)
+			usleep((data->args.time_to_sleep - et) * 800);
+	}
+	gettimeofday(&ts, NULL);
+	if (ft_check_finish(data))
+		return ;
+	et = ft_time_diff(&pi->ch_status_ts, &ts);
+	if (et >= data->args.time_to_sleep)
+	{
+		pi->status = stat_thinking;
+		pi->ch_status_ts = ts;
+		ft_print_event(data, "is thinking", philo_id);
 	}
 	return ;
 }
@@ -91,7 +103,7 @@ void	ft_philo_behavior(t_program_data *data, int philo_id)
 
 	ret = NULL;
 	pi = &data->philo;
-	while (pi->status != stat_dead)
+	while (pi->status != stat_dead && !ft_check_finish(data))
 	{
 		if (pi->status == stat_sleeping)
 			ft_philo_sleeps(data, philo_id);
@@ -101,10 +113,7 @@ void	ft_philo_behavior(t_program_data *data, int philo_id)
 			ft_philo_eats(data, philo_id);
 		else if (pi->status == stat_dead)
 			return ;
-		else if (pi->status != stat_done)
-			pi->status = stat_dead;
 		usleep(10);
 	}
 	return ;
 }
-

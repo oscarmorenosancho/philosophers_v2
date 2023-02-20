@@ -6,13 +6,14 @@
 #    By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 16:36:01 by omoreno-          #+#    #+#              #
-#    Updated: 2023/02/20 12:12:39 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/02/20 17:24:01 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := philo_bonus
 
 SRC := philo_bonus.c\
+philo2_bonus.c\
 ft_atoi_bonus.c\
 ft_itoa_bonus.c\
 ft_strncmp_bonus.c\
@@ -23,8 +24,11 @@ ft_time_diff_bonus.c\
 ft_print_event_bonus.c\
 ft_get_timestamp_bonus.c\
 forks_bonus.c\
-ft_update_dead_bonus.c\
+update_status_bonus.c\
 ft_philo_behavior_bonus.c\
+dead_thread_bonus.c\
+ft_check_finish.c\
+status_sem_bonus.c\
 sem_bonus.c
 
 OBJ := $(SRC:.c=.o)

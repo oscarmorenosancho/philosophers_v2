@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_update_dead_bonus.c                             :+:      :+:    :+:   */
+/*   ft_check_finish.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 16:11:38 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:18:44 by omoreno-         ###   ########.fr       */
+/*   Created: 2023/02/20 16:32:37 by omoreno-          #+#    #+#             */
+/*   Updated: 2023/02/20 16:39:22 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	ft_update_dead(t_program_data *data, t_timestamp *ts, int philo_id)
+int	ft_check_finish(t_program_data *data)
 {
-	t_philo_info	*pi;
-	int				dead;
-	time_t			et;
-
-	pi = &data->philo;
-	ft_get_timestamp(ts);
-	et = ft_time_diff(&pi->eat_ts, ts);
-	dead = (et >= data->args.time_to_die);
-	if (dead && pi->status != stat_dead)
-	{
-		ft_print_event(data, "died", philo_id);
-		pi->status = stat_dead;
-		pi->ch_status_ts = *ts;
-	}
-	return (dead);
+	if (!data)
+		return (1);
+	return (data->philo.exit_flag || data->philo.dead);
 }
