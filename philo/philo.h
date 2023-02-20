@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 18:44:28 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:33:13 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	ft_init_philo(t_program_data *data);
 void	ft_delete_philo(t_program_data *data);
 int		ft_check_finish(t_philo_info *pi);
 void	ft_update_dead(t_philo_info *pi);
-void	ft_update_dead_loop(t_program_data *data);
 void	ft_update_status(t_philo_info *pi, t_philo_status new_status);
 void	ft_philo_sleeps(t_philo_info *pi);
 void	ft_philo_thinks(t_philo_info *pi);

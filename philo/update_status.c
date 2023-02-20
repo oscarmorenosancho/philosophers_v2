@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:11:38 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 19:25:25 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:32:16 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ void	ft_update_status(t_philo_info *pi, t_philo_status new_status)
 		&& pi->eat_count >= pi->args->times_must_eat)
 		ft_update_done_status(pi);
 }
-

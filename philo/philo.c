@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 19:29:13 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:39:59 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,8 @@ static void	ft_wait_for_ending(t_program_data *data)
 {
 	while (!data->exit_flag && data->done_cntdwn > 0)
 		usleep (data->args.time_to_die * 1000);
-	if (data->done_cntdwn == 0)
-		printf("DONE COUNTDOWN DETECTED, go and wait with join\n");
-	if (data->exit_flag)
-		printf("EXIT DETECTED, go and wait with join\n");
 	ft_join_dead_threads(data);
 	ft_join_threads(data);
-	printf("Joined all threads\n");
 }
 
 static void	ft_deploy(t_program_data *data)
@@ -56,7 +51,6 @@ static void	ft_deploy(t_program_data *data)
 	ft_init_philo(data);
 	ft_create_dead_threads(data);
 	ft_create_threads(data);
-	//ft_update_dead_loop(data);
 	ft_wait_for_ending(data);
 	ft_destroy_dead_threads(data);
 	ft_destroy_threads(data);

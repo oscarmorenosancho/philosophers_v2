@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:32:16 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/19 18:13:58 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:43:07 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_print_event(t_philo_info *pi, t_timestamp *ts, char *s)
 		else
 			gettimeofday(&tsp, NULL);
 		te = ft_time_diff(pi->initial_ts, &tsp);
-		printf("%lu %d %s at iter %d\n", te, pi->id, s, pi->eat_count);
+		printf("%lu %d %s\n", te, pi->id, s);
 	}
 	mu_ret = pthread_mutex_unlock(pi->print_mutex);
 }
