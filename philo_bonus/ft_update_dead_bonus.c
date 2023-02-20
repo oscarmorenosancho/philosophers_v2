@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:11:38 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/01 15:46:55 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:18:44 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_update_dead(t_program_data *data, t_timestamp *ts, int philo_id)
 	int				dead;
 	time_t			et;
 
-	pi = &data->philos[philo_id - 1];
+	pi = &data->philo;
 	ft_get_timestamp(ts);
 	et = ft_time_diff(&pi->eat_ts, ts);
 	dead = (et >= data->args.time_to_die);

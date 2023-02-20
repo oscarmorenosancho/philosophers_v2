@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:58:12 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/01 16:51:49 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:08:42 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_philo_sleeps(t_program_data *data, int philo_id)
 	t_timestamp		ts;
 	time_t			et;
 
-	pi = &data->philos[philo_id - 1];
+	pi = &data->philo;
 	if (!ft_update_dead(data, &ts, philo_id))
 	{
 		et = ft_time_diff(&pi->ch_status_ts, &ts);
@@ -37,24 +37,14 @@ void	ft_philo_thinks(t_program_data *data, int philo_id)
 	t_philo_info	*pi;
 	t_timestamp		ts;
 	time_t			et;
-	int				sw_ret;	
 
-	pi = &data->philos[philo_id - 1];
+	pi = &data->philo;
 	if (!ft_update_dead(data, &ts, philo_id))
 	{
 		et = ft_time_diff(&pi->ch_status_ts, &ts);
-		if (pi->forks_taken == 0)
+		ft_take_forks(data, philo_id);
+		if (pi->forks_taken > 1)
 		{
-			sw_ret = sem_wait(data->sem_forks);
-			ft_print_event(data, "has taken a fork", philo_id);
-			pi->forks_taken = 1;
-		}
-		if (!ft_update_dead(data, &ts, philo_id) \
-				&& pi->forks_taken == 1 && data->args.philo_nbr > 1)
-		{
-			sem_wait(data->sem_forks);
-			pi->forks_taken = 2;
-			ft_print_event(data, "has taken a fork", philo_id);
 			ft_print_event(data, "is eating", philo_id);
 			pi->status = stat_eating;
 			pi->ch_status_ts = ts;
@@ -65,30 +55,13 @@ void	ft_philo_thinks(t_program_data *data, int philo_id)
 	return ;
 }
 
-static void	ft_release_forks(t_program_data *data, int philo_id)
-{
-	t_philo_info	*pi;
-
-	pi = &data->philos[philo_id - 1];
-	if (pi->forks_taken == 2)
-	{
-		sem_post(data->sem_forks);
-		pi->forks_taken = 1;
-	}
-	if (pi->forks_taken == 1 && data->args.philo_nbr > 1)
-	{
-		sem_post(data->sem_forks);
-		pi->forks_taken = 0;
-	}
-}
-
 void	ft_philo_eats(t_program_data *data, int philo_id)
 {
 	t_philo_info	*pi;
 	t_timestamp		ts;
 	time_t			et;
 
-	pi = &data->philos[philo_id - 1];
+	pi = &data->philo;
 	if (!ft_update_dead(data, &ts, philo_id))
 	{
 		et = ft_time_diff(&pi->ch_status_ts, &ts);
@@ -117,7 +90,7 @@ void	ft_philo_behavior(t_program_data *data, int philo_id)
 	t_philo_info	*pi;
 
 	ret = NULL;
-	pi = &data->philos[philo_id - 1];
+	pi = &data->philo;
 	while (pi->status != stat_dead)
 	{
 		if (pi->status == stat_sleeping)
@@ -134,3 +107,4 @@ void	ft_philo_behavior(t_program_data *data, int philo_id)
 	}
 	return ;
 }
+

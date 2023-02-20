@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/16 13:20:02 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:13:18 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_philo_args
 typedef struct s_philo_info
 {
 	int				id;
-	pid_t			pid;
 	t_philo_status	status;
 	int				eat_count;
 	int				forks_taken;
@@ -55,10 +54,11 @@ typedef struct s_philo_info
 
 typedef struct s_program_data
 {	
+	pid_t			*philo_pids;
 	t_philo_args	args;
 	sem_t			*sem_forks;
 	sem_t			*sem_print;
-	t_philo_info	*philos;
+	t_philo_info	philo;
 	t_timestamp		initial_ts;
 }	t_program_data;
 
@@ -72,6 +72,8 @@ time_t	ft_time_diff(t_timestamp *ref, t_timestamp *time);
 int		ft_take_args(t_program_data *data, int argc, char **argv);
 void	ft_create_forks_sem(t_program_data *data);
 void	ft_destroy_forks_sem(t_program_data *data);
+void	ft_take_forks(t_program_data *data, int philo_id);
+void	ft_release_forks(t_program_data *data, int philo_id);
 void	ft_create_print_sem(t_program_data *data);
 void	ft_destroy_print_sem(t_program_data *data);
 int		ft_update_dead(t_program_data *data, t_timestamp *ts, int philo_id);
