@@ -6,26 +6,26 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:00:12 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:50:50 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:05:41 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	ft_create_status_sem(t_program_data *data)
+void	ft_create_status_sem(t_philo_info *pi)
 {
-	char	*err_msg;
-	char	*id_str;
+	char			*err_msg;
+	char			*id_str;
 
-	if (!data->philo.status_sem_name)
+	if (!pi->status_sem_name)
 		return ;
-	id_str = ft_itoa(data->philo.id);
-	sem_unlink(data->philo.status_sem_name);
-	data->philo.sem_status = sem_open(data->philo.status_sem_name, O_CREAT, \
+	id_str = ft_itoa(pi->id);
+	sem_unlink(pi->status_sem_name);
+	pi->sem_status = sem_open(pi->status_sem_name, O_CREAT, \
 		S_IRWXU | S_IRWXG | S_IRWXO, 1);
-	if (data->philo.sem_status == SEM_FAILED)
+	if (pi->sem_status == SEM_FAILED)
 	{
-		data->philo.sem_status = NULL;
+		pi->sem_status = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
 		err_msg = "open status semaphore failed\n"; 
@@ -33,16 +33,16 @@ void	ft_create_status_sem(t_program_data *data)
 	}
 }
 
-void	ft_destroy_status_sem(t_program_data *data)
+void	ft_destroy_status_sem(t_philo_info *pi)
 {
-	char	*err_msg;
-	int		sc_ret;
+	char			*err_msg;
+	int				sc_ret;
 
-	if (!data->philo.status_sem_name)
+	if (!pi->status_sem_name)
 		return ;
 	sc_ret = 0;
-	if (data->philo.sem_status)
-		sc_ret = sem_close(data->philo.sem_status);
+	if (pi->sem_status)
+		sc_ret = sem_close(pi->sem_status);
 	if (sc_ret != 0)
 	{
 		err_msg = "Error\n";
@@ -51,5 +51,5 @@ void	ft_destroy_status_sem(t_program_data *data)
 		write(2, err_msg, ft_strlen(err_msg));
 		return ;
 	}
-	sem_unlink(data->philo.status_sem_name);
+	sem_unlink(pi->status_sem_name);
 }

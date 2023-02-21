@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:01:10 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 16:27:45 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:44:29 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,26 @@
 
 void	*ft_check_dead(void *arg)
 {
-	t_program_data	*data;
 	t_philo_info	*pi;
 	int				id;
 	int				dead;
 	t_timestamp		ts;
 
 	dead = 0;
-	data = arg;
-	pi = &data->philo;
+	pi = arg;
 	id = pi->id;
 	while (! dead)
-		dead = ft_update_dead(data, &ts, id);
-	sem_post(data->sem_exit);
+		dead = ft_update_dead(pi, &ts);
+	sem_post(pi->program_data->sem_exit);
 	return (NULL);
 }
 
-void	ft_create_check_dead(t_program_data *data)
+void	ft_create_check_dead(t_philo_info *pi)
 {
 	int				thc_ret;
-	pthread_attr_t	attr;
 	pthread_attr_t	*pattr;
 
-	(void)attr;
 	pattr = NULL;
-	thc_ret = pthread_create(&data->philo.check_dead_thread, pattr, \
-		&ft_check_dead, data);
-	pthread_detach(data->philo.check_dead_thread);
+	thc_ret = pthread_create(&pi->check_dead_thread, pattr, &ft_check_dead, pi);
+	pthread_detach(pi->check_dead_thread);
 }

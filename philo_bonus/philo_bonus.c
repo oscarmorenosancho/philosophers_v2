@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:13:26 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:47:20 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ static void	ft_deploy(t_program_data *data)
 	ft_create_forks_sem(data);
 	ft_create_philos(data, &fork_ret);
 	if (fork_ret == 0)
+	{
+		ft_destroy_status_sem(&data->philo);
 		return ;
+	}
 	sem_wait(data->sem_exit);
+	ft_kill_philos(data);
 	ft_wait_for_philos(data);
 	ft_destroy_philos(data);
 	ft_destroy_forks_sem(data);

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 18:54:40 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:57:46 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@ typedef struct s_philo_args
 
 typedef struct s_philo_info
 {
-	int				id;
-	int				exit_flag;
-	char			*status_sem_name;
-	sem_t			*sem_status;
-	t_philo_status	status;
-	int				eat_count;
-	int				dead;
-	int				forks_taken;
-	t_timestamp		eat_ts;
-	t_timestamp		ch_status_ts;
-	pthread_t		check_dead_thread;
+	int						id;
+	int						exit_flag;
+	char					*status_sem_name;
+	sem_t					*sem_status;
+	t_philo_status			status;
+	int						eat_count;
+	int						dead;
+	int						forks_taken;
+	t_timestamp				eat_ts;
+	t_timestamp				ch_status_ts;
+	pthread_t				check_dead_thread;
+	struct s_program_data	*program_data;
 }	t_philo_info;
 
 typedef struct s_program_data
@@ -66,6 +67,7 @@ typedef struct s_program_data
 	sem_t			*sem_print;
 	t_philo_info	philo;
 	t_timestamp		initial_ts;
+	int				exit_flag;
 }	t_program_data;
 
 int		ft_strlen(const char *s);
@@ -79,21 +81,22 @@ time_t	ft_time_diff(t_timestamp *ref, t_timestamp *time);
 int		ft_take_args(t_program_data *data, int argc, char **argv);
 void	ft_create_forks_sem(t_program_data *data);
 void	ft_destroy_forks_sem(t_program_data *data);
-void	ft_take_forks(t_program_data *data, int philo_id);
-void	ft_release_forks(t_program_data *data, int philo_id);
+void	ft_take_forks(t_philo_info *pi);
+void	ft_release_forks(t_philo_info *pi);
 void	ft_create_print_sem(t_program_data *data);
 void	ft_destroy_print_sem(t_program_data *data);
 void	ft_create_exit_sem(t_program_data *data);
 void	ft_destroy_exit_sem(t_program_data *data);
-void	ft_create_status_sem(t_program_data *data);
-void	ft_destroy_status_sem(t_program_data *data);
+void	ft_create_status_sem(t_philo_info *pi);
+void	ft_destroy_status_sem(t_philo_info *pi);
 void	ft_create_philos(t_program_data *data, pid_t *fork_ret);
 void	ft_destroy_philos(t_program_data *data);
+void	ft_kill_philos(t_program_data *data);
 void	ft_wait_for_philos(t_program_data *data);
-void	ft_create_check_dead(t_program_data *data);
-int		ft_update_dead(t_program_data *data, t_timestamp *ts, int philo_id);
-void	ft_philo_behavior(t_program_data *data, int philo_id);
-void	ft_print_event(t_program_data *data, char *s, int philo_id);
-int		ft_check_finish(t_program_data *data);
+void	ft_create_check_dead(t_philo_info *pi);
+int		ft_update_dead(t_philo_info *pi, t_timestamp *ts);
+void	ft_philo_behavior(t_philo_info *pi);
+void	ft_print_event(t_philo_info *pi, char *s);
+int		ft_check_finish(t_philo_info *pi);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:04:28 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 13:18:02 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:59:46 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,28 @@ void	ft_destroy_forks_sem(t_program_data *data)
 	sem_unlink("/philo_forks_sem");
 }
 
-void	ft_take_forks(t_program_data *data, int philo_id)
+void	ft_take_forks(t_philo_info *pi)
 {
-	t_philo_info	*pi;
+	t_program_data	*pd;
 	int				sw_ret;
 
-	pi = &data->philo;
+	pd = pi->program_data;
 	while (pi->forks_taken < 2)
 	{
-		sw_ret = sem_wait(data->sem_forks);
-		ft_print_event(data, "has taken a fork", philo_id);
+		sw_ret = sem_wait(pd->sem_forks);
+		ft_print_event(pi, "has taken a fork");
 		pi->forks_taken++;
 	}
 }
 
-void	ft_release_forks(t_program_data *data, int philo_id)
+void	ft_release_forks(t_philo_info *pi)
 {
-	t_philo_info	*pi;
+	t_program_data	*pd;
 
-	(void)philo_id;
-	pi = &data->philo;
+	pd = pi->program_data;
 	while (pi->forks_taken > 0)
 	{
-		sem_post(data->sem_forks);
+		sem_post(pd->sem_forks);
 		pi->forks_taken--;
 	}
 }

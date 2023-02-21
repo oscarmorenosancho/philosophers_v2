@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:10:58 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 19:08:52 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 12:48:02 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	ft_init_philo(t_program_data *data, int philo_id)
 	pi->status = stat_sleeping;
 	pi->eat_count = 0;
 	pi->forks_taken = 0;
-	ft_create_status_sem(data);
+	pi->program_data = data;
+	ft_create_status_sem(&data->philo);
 	if (data->philo.status_sem_name)
 	{
 		pi->status_sem_name = ft_posfix_itoa("/philo_status_sem", philo_id);
@@ -50,8 +51,8 @@ void	ft_create_philos(t_program_data *data, pid_t *fork_ret)
 	if (*fork_ret == 0)
 	{
 		ft_init_philo(data, i);
-		ft_create_check_dead(data);
-		ft_philo_behavior(data, i);
+		ft_create_check_dead(&data->philo);
+		ft_philo_behavior(&data->philo);
 	}
 }
 
@@ -59,7 +60,6 @@ void	ft_destroy_philos(t_program_data *data)
 {
 	if (! data)
 		return ;
-	ft_destroy_status_sem(data);
 	if (data->philo_pids)
 		free (data->philo_pids);
 }
