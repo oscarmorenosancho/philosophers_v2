@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:14:17 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 17:02:02 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:49:18 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_create_exit_sem(t_program_data *data)
 
 	sem_unlink("/philo_exit_sem");
 	data->sem_exit = sem_open("/philo_exit_sem", O_CREAT, \
-		S_IRWXU | S_IRWXG | S_IRWXO, 1);
+		S_IRWXU | S_IRWXG | S_IRWXO, 0);
 	if (data->sem_exit == SEM_FAILED)
 	{
 		data->sem_exit = NULL;

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 12:57:46 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:35:02 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ typedef enum e_philo_status{
 	stat_dead,
 	stat_thinking,
 	stat_eating,
-	stat_sleeping,
-	stat_done
+	stat_sleeping
 }	t_philo_status;
 
 typedef struct timeval	t_timestamp;
@@ -95,6 +94,7 @@ void	ft_kill_philos(t_program_data *data);
 void	ft_wait_for_philos(t_program_data *data);
 void	ft_create_check_dead(t_philo_info *pi);
 int		ft_update_dead(t_philo_info *pi, t_timestamp *ts);
+void	ft_update_status(t_philo_info *pi, t_philo_status new_status);
 void	ft_philo_behavior(t_philo_info *pi);
 void	ft_print_event(t_philo_info *pi, char *s);
 int		ft_check_finish(t_philo_info *pi);

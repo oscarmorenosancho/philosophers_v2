@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:32:16 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 12:22:37 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:05:24 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void	ft_print_event(t_philo_info *pi, char *s)
 
 	pd = pi->program_data;
 	sem_wait(pd->sem_print);
-	ft_get_timestamp(&ts);
-	te = ft_time_diff(&pd->initial_ts, &ts);
-	printf("%lu %d %s\n", te, pi->id, s);
+	if (!ft_check_finish(pi))
+	{
+		ft_get_timestamp(&ts);
+		te = ft_time_diff(&pd->initial_ts, &ts);
+		printf("%lu %d %s at iter %d\n", te, pi->id, s, pi->eat_count);
+	}
 	sem_post(pd->sem_print);
 }

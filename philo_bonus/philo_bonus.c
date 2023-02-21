@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 12:47:20 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:58:43 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	ft_deploy(t_program_data *data)
 		return ;
 	}
 	sem_wait(data->sem_exit);
+	printf("philo:%d after wait for exit\n", data->philo.id);
 	ft_kill_philos(data);
 	ft_wait_for_philos(data);
 	ft_destroy_philos(data);

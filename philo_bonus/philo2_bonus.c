@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:10:58 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 12:48:02 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:57:04 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ static void	ft_init_philo(t_program_data *data, int philo_id)
 
 	pi = &data->philo;
 	pi->id = philo_id;
+	pi->dead = 0;
 	pi->ch_status_ts = data->initial_ts;
 	pi->eat_ts = data->initial_ts;
-	pi->status = stat_sleeping;
+	if (philo_id % 2)
+		pi->status = stat_sleeping;
+	else
+		pi->status = stat_thinking;
 	pi->eat_count = 0;
 	pi->forks_taken = 0;
 	pi->program_data = data;

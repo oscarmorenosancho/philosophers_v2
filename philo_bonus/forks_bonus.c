@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:04:28 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 12:59:46 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:22:34 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_take_forks(t_philo_info *pi)
 	int				sw_ret;
 
 	pd = pi->program_data;
-	while (pi->forks_taken < 2)
+	while (pi->forks_taken < 2 && !ft_check_finish(pi))
 	{
 		sw_ret = sem_wait(pd->sem_forks);
 		ft_print_event(pi, "has taken a fork");
