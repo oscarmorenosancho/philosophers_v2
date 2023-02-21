@@ -6,7 +6,7 @@
 #    By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 16:36:01 by omoreno-          #+#    #+#              #
-#    Updated: 2023/02/20 17:24:01 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/02/21 17:57:57 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ forks_bonus.c\
 update_status_bonus.c\
 ft_philo_behavior_bonus.c\
 dead_thread_bonus.c\
+done_thread_bonus.c\
 ft_check_finish.c\
 status_sem_bonus.c\
 sem_bonus.c

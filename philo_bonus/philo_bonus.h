@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 15:35:02 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:18:35 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ typedef struct s_program_data
 	t_philo_args	args;
 	sem_t			*sem_forks;
 	sem_t			*sem_exit;
+	sem_t			*sem_done;
 	sem_t			*sem_print;
 	t_philo_info	philo;
+	pthread_t		check_done_thread;
 	t_timestamp		initial_ts;
 	int				exit_flag;
 }	t_program_data;
@@ -84,10 +86,13 @@ void	ft_take_forks(t_philo_info *pi);
 void	ft_release_forks(t_philo_info *pi);
 void	ft_create_print_sem(t_program_data *data);
 void	ft_destroy_print_sem(t_program_data *data);
+void	ft_create_done_sem(t_program_data *data);
+void	ft_destroy_done_sem(t_program_data *data);
 void	ft_create_exit_sem(t_program_data *data);
 void	ft_destroy_exit_sem(t_program_data *data);
 void	ft_create_status_sem(t_philo_info *pi);
 void	ft_destroy_status_sem(t_philo_info *pi);
+void	ft_create_done_thread(t_program_data *data);
 void	ft_create_philos(t_program_data *data, pid_t *fork_ret);
 void	ft_destroy_philos(t_program_data *data);
 void	ft_kill_philos(t_program_data *data);

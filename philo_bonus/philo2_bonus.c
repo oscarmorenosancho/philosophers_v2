@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:10:58 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 15:57:04 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 19:09:55 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	ft_create_philos(t_program_data *data, pid_t *fork_ret)
 		ft_init_philo(data, i);
 		ft_create_check_dead(&data->philo);
 		ft_philo_behavior(&data->philo);
+	}
+	else
+	{
+
 	}
 }
 

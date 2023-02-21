@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 15:58:43 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:29:03 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static void	ft_deploy(t_program_data *data)
 
 	ft_get_timestamp(&data->initial_ts);
 	ft_create_exit_sem(data);
+	ft_create_done_sem(data);
 	ft_create_print_sem(data);
 	ft_create_forks_sem(data);
+	ft_create_done_thread(data);
 	ft_create_philos(data, &fork_ret);
 	if (fork_ret == 0)
 	{
@@ -49,12 +51,14 @@ static void	ft_deploy(t_program_data *data)
 		return ;
 	}
 	sem_wait(data->sem_exit);
+	sem_post(data->sem_done);
 	printf("philo:%d after wait for exit\n", data->philo.id);
 	ft_kill_philos(data);
 	ft_wait_for_philos(data);
 	ft_destroy_philos(data);
 	ft_destroy_forks_sem(data);
 	ft_destroy_print_sem(data);
+	ft_destroy_done_sem(data);
 	ft_destroy_exit_sem(data);
 }
 
