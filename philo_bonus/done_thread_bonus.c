@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 17:48:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 19:07:40 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:50:04 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_check_done(void *arg)
 
 	pd = arg;
 	done_philos = 0;
-	while (done_philos < pd->args.philo_nbr)
+	while (done_philos <= pd->args.philo_nbr)
 	{
 		sem_wait(pd->sem_done);
 		done_philos++;

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 11:39:59 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:59:35 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ static void	ft_print_usage_help(void)
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "Usage: ./philo ";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "<number_of_philosophers> <time_to_die> ";
+	err_msg = "<number_of_philo> <time_to_die> ";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "<time_to_eat> <time_to_sleep> ";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "[number_of_times_each_philosopher_must_eat]\n";
+	err_msg = "[number_of_times_each_philo_must_eat]\n";
+	write(2, err_msg, ft_strlen(err_msg));
+	err_msg = "Time parameters will be expressed in miliseconds\n";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "All arguments must be positive\n";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "number_of_times_each_philosopher_must_eat can be 0\n";
+	err_msg = "number_of_times_each_philo_must_eat can be 0\n";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "what will mean that the program only ends when one died\n";
 	write(2, err_msg, ft_strlen(err_msg));

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 15:10:58 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 19:09:55 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:09:39 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	ft_create_philos(t_program_data *data, pid_t *fork_ret)
 		ft_philo_behavior(&data->philo);
 	}
 	else
-	{
-
-	}
+		ft_create_done_thread(data);
 }
 
 void	ft_destroy_philos(t_program_data *data)

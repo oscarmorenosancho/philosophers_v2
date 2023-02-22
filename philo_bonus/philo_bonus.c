@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:29:03 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:00:05 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ static void	ft_print_usage_help(void)
 
 	err_msg = "Error\n";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "Usage: ./philo ";
+	err_msg = "Usage: ./philo_bonus ";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "<number_of_philosophers> <time_to_die> ";
+	err_msg = "<number_of_philo> <time_to_die> ";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "<time_to_eat> <time_to_sleep> ";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "[number_of_times_each_philosopher_must_eat]\n";
+	err_msg = "[number_of_times_each_philo_must_eat]\n";
+	write(2, err_msg, ft_strlen(err_msg));
+	err_msg = "Time parameters will be expressed in miliseconds\n";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "All arguments must be positive\n";
 	write(2, err_msg, ft_strlen(err_msg));
-	err_msg = "number_of_times_each_philosopher_must_eat can be 0\n";
+	err_msg = "number_of_times_each_philo_must_eat can be 0\n";
 	write(2, err_msg, ft_strlen(err_msg));
 	err_msg = "what will mean that the program only ends when one died\n";
 	write(2, err_msg, ft_strlen(err_msg));
@@ -43,7 +45,6 @@ static void	ft_deploy(t_program_data *data)
 	ft_create_done_sem(data);
 	ft_create_print_sem(data);
 	ft_create_forks_sem(data);
-	ft_create_done_thread(data);
 	ft_create_philos(data, &fork_ret);
 	if (fork_ret == 0)
 	{
@@ -51,8 +52,8 @@ static void	ft_deploy(t_program_data *data)
 		return ;
 	}
 	sem_wait(data->sem_exit);
+	data->exit_flag = 1;
 	sem_post(data->sem_done);
-	printf("philo:%d after wait for exit\n", data->philo.id);
 	ft_kill_philos(data);
 	ft_wait_for_philos(data);
 	ft_destroy_philos(data);
