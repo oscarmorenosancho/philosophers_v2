@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:26:30 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/20 11:11:00 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:57:06 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	ft_philo_eats(t_philo_info *pi)
 	ft_release_forks(pi);
 	if (ft_check_finish(pi))
 		return ;
-	ft_update_status(pi, stat_sleeping);
 	ft_print_event(pi, &ts, "is sleeping");
+	ft_update_status(pi, stat_sleeping);
 }

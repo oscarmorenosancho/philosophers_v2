@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:05:37 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:18:35 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:28:55 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ typedef struct s_philo_args
 typedef struct s_philo_info
 {
 	int						id;
-	int						exit_flag;
 	char					*status_sem_name;
 	sem_t					*sem_status;
 	t_philo_status			status;
 	int						eat_count;
-	int						dead;
 	int						forks_taken;
 	t_timestamp				eat_ts;
 	t_timestamp				ch_status_ts;

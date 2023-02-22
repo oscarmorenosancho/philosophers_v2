@@ -6,29 +6,30 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 16:01:10 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 15:53:48 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:26:45 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 #define CHECK_PERIOD	1000
 
-void	*ft_check_dead(void *arg)
+static void	*ft_check_dead(void *arg)
 {
 	t_philo_info	*pi;
 	int				id;
 	t_timestamp		ts;
+	int				dead;
 
 	pi = arg;
 	id = pi->id;
-	while (! pi->dead && !ft_check_finish(pi))
+	dead = 0;
+	while (! dead && !ft_check_finish(pi))
 	{
-		pi->dead = ft_update_dead(pi, &ts);
+		dead = ft_update_dead(pi, &ts);
 		usleep(CHECK_PERIOD);
 	}
-	if (pi->dead)
+	if (dead)
 	{
-		pi->exit_flag = 1;
 		pi->program_data->exit_flag = 1;
 		sem_post(pi->program_data->sem_exit);
 	}

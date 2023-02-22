@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/22 12:00:05 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:39:07 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static void	ft_print_usage_help(void)
 	write(2, err_msg, ft_strlen(err_msg));
 }
 
+static void ft_unblock_done_thread(t_program_data *data)
+{
+	data->exit_flag = 1;
+	sem_post(data->sem_done);
+}
+
 static void	ft_deploy(t_program_data *data)
 {
 	pid_t	fork_ret;
@@ -52,8 +58,7 @@ static void	ft_deploy(t_program_data *data)
 		return ;
 	}
 	sem_wait(data->sem_exit);
-	data->exit_flag = 1;
-	sem_post(data->sem_done);
+	ft_unblock_done_thread(data);
 	ft_kill_philos(data);
 	ft_wait_for_philos(data);
 	ft_destroy_philos(data);

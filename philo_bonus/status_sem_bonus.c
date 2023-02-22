@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 17:00:12 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 18:08:50 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:08:23 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_create_status_sem(t_philo_info *pi)
 		pi->sem_status = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
-		err_msg = "open status semaphore failed\n"; 
+		err_msg = "open status semaphore failed\n";
 		write(2, err_msg, ft_strlen(err_msg));
 	}
 }
@@ -60,13 +60,13 @@ void	ft_create_done_sem(t_program_data *data)
 
 	sem_unlink("/philo_done_sem");
 	data->sem_done = sem_open("/philo_done_sem", O_CREAT, \
-		S_IRWXU | S_IRWXG | S_IRWXO, 1);
+		S_IRWXU | S_IRWXG | S_IRWXO, 0);
 	if (data->sem_done == SEM_FAILED)
 	{
 		data->sem_done = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
-		err_msg = "open done semaphore failed\n"; 
+		err_msg = "open done semaphore failed\n";
 		write(2, err_msg, ft_strlen(err_msg));
 	}
 }

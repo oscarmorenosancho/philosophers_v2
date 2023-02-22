@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:59:35 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:16:23 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_print_usage_help(void)
 static void	ft_wait_for_ending(t_program_data *data)
 {
 	while (!data->exit_flag && data->done_cntdwn > 0)
-		usleep (data->args.time_to_die * 1000);
+		usleep (1000);
 	ft_join_dead_threads(data);
 	ft_join_threads(data);
 }

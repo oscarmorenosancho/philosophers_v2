@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:04:28 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 15:22:34 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:20:47 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_create_forks_sem(t_program_data *data)
 		data->sem_forks = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
-		err_msg = "open forks semaphore failed\n"; 
+		err_msg = "open forks semaphore failed\n";
 		write(2, err_msg, ft_strlen(err_msg));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:32:16 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/22 13:14:24 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:19:50 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_print_event(t_philo_info *pi, char *s)
 	t_program_data	*pd;
 
 	pd = pi->program_data;
+	if (ft_check_finish(pi))
+		return ;
 	sem_wait(pd->sem_print);
 	if (!ft_check_finish(pi))
 	{

@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:14:17 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/21 14:49:18 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:28:21 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_create_print_sem(t_program_data *data)
 		data->sem_print = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
-		err_msg = "open print semaphore failed\n"; 
+		err_msg = "open print semaphore failed\n";
 		write(2, err_msg, ft_strlen(err_msg));
 	}
 }
@@ -60,7 +60,7 @@ void	ft_create_exit_sem(t_program_data *data)
 		data->sem_exit = NULL;
 		err_msg = "Error\n";
 		write(2, err_msg, ft_strlen(err_msg));
-		err_msg = "open exit semaphore failed\n"; 
+		err_msg = "open exit semaphore failed\n";
 		write(2, err_msg, ft_strlen(err_msg));
 	}
 }
