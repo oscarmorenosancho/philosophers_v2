@@ -6,7 +6,7 @@
 #    By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 16:36:01 by omoreno-          #+#    #+#              #
-#    Updated: 2023/02/21 17:57:57 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/02/23 16:22:11 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,12 @@ ft_take_args_bonus.c\
 ft_strlen_bonus.c\
 ft_time_diff_bonus.c\
 ft_print_event_bonus.c\
-ft_get_timestamp_bonus.c\
 forks_bonus.c\
 update_status_bonus.c\
 ft_philo_behavior_bonus.c\
 dead_thread_bonus.c\
 done_thread_bonus.c\
-ft_check_finish.c\
+ft_check_finish_bonus.c\
 status_sem_bonus.c\
 sem_bonus.c
 

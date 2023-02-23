@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:32:16 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/22 19:19:50 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:26:12 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_print_event(t_philo_info *pi, char *s)
 	sem_wait(pd->sem_print);
 	if (!ft_check_finish(pi))
 	{
-		ft_get_timestamp(&ts);
+		gettimeofday(&ts, NULL);
 		te = ft_time_diff(&pd->initial_ts, &ts);
 		printf("%lu %d %s\n", te, pi->id, s);
 	}

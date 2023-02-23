@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:38:13 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/02/22 19:36:11 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:25:47 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_deploy(t_program_data *data)
 {
 	pid_t	fork_ret;
 
-	ft_get_timestamp(&data->initial_ts);
+	gettimeofday(&data->initial_ts, NULL);
 	ft_create_exit_sem(data);
 	ft_create_done_sem(data);
 	ft_create_print_sem(data);
